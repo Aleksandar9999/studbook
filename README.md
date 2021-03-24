@@ -1,4 +1,4 @@
-# student_connection
+# StudBook
 
 A new Flutter project.
 
