@@ -1,0 +1,58 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+class Faculty extends StatelessWidget {
+  String nazivFakulteta;
+  String idFakulteta;
+  String grad;
+  String urlLogo;
+  Faculty({this.idFakulteta, this.nazivFakulteta, this.urlLogo, this.grad});
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10, left: 15, right: 10),
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(15)),
+        height: 80,
+        child: Center(
+            child: Row(
+          children: [
+            Container(
+              height: 70,
+              width: 70,
+              margin: EdgeInsets.only(left: 5),
+              child: Image.network(urlLogo),
+            ),
+            Flexible(
+              child: Container(
+                margin: EdgeInsets.only(left: 15, top: 20, right: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      nazivFakulteta,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    Text(
+                      grad,
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.grey[800]),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        )),
+      ),
+    );
+  }
+}
