@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:student_connection/pages/facultypage.dart';
+import 'package:student_connection/pages/home.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -23,6 +24,24 @@ class _LoginPageState extends State<LoginPage> {
             },
             pageBuilder: (context, animation, secAnimation) {
               return FacultyPage();
+            }));
+  }
+
+  navigateUser() {
+    Navigator.push(
+        context,
+        PageRouteBuilder(
+            transitionDuration: Duration(milliseconds: 400),
+            transitionsBuilder: (context, animation, secanimation, child) {
+              animation =
+                  CurvedAnimation(parent: animation, curve: Curves.ease);
+              return ScaleTransition(
+                  scale: animation,
+                  alignment: Alignment.bottomCenter,
+                  child: child);
+            },
+            pageBuilder: (context, animation, secAnimation) {
+              return Home();
             }));
   }
 
@@ -58,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                 primary: Colors.blue[900], // background
                 onPrimary: Colors.white, // foreground
               ),
-              onPressed: () => {print("klik")},
+              onPressed: navigateUser,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text(

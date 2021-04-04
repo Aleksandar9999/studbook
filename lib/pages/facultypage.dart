@@ -15,6 +15,8 @@ class _FacultyPageState extends State<FacultyPage> {
     super.initState();
     fakulteti.add(Faculty(
       nazivFakulteta: "Fakultet tehničkih nauka",
+      photoUrl:
+          "https://www.najstudent.com/public/files/organization/organization_960/fakultet-tehnickih-nauka-novi-sad-slika.jpg",
       grad: "Novi Sad",
       urlLogo:
           "https://seeklogo.com/images/F/Fakultet_tehnickih_nauka_-_Novi_Sad-logo-C11C616640-seeklogo.com.png",
