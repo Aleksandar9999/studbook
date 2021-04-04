@@ -1,17 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class Subject extends StatelessWidget {
-  String nazivPredmeta;
-  String sifraPredmeta;
-  String godinaStudija;
-  Subject({this.nazivPredmeta, this.sifraPredmeta, this.godinaStudija});
-  otvoriPredmet(context) {}
+class UseFulLinks extends StatelessWidget {
+  String url;
+  String naziv;
+
+  UseFulLinks({this.url, this.naziv});
+
+  otovirURL() {
+    launch(url);
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => otvoriPredmet(context),
+      onTap: otovirURL,
       child: Container(
         margin: EdgeInsets.only(bottom: 15, left: 10, right: 10),
         decoration: BoxDecoration(
@@ -33,24 +38,8 @@ class Subject extends StatelessWidget {
             Expanded(
                 child: Padding(
               padding: const EdgeInsets.only(left: 20.0),
-              child: Text(nazivPredmeta,
-                  overflow: TextOverflow.ellipsis, maxLines: 3),
+              child: Text(naziv, overflow: TextOverflow.ellipsis, maxLines: 3),
             )),
-            RatingBar.builder(
-              initialRating: 3,
-              itemSize: 20,
-              minRating: 1,
-              direction: Axis.horizontal,
-              allowHalfRating: true,
-              itemCount: 5,
-              maxRating: 3,
-              ignoreGestures: true,
-              itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-              itemBuilder: (context, _) => Icon(
-                Icons.star,
-                color: Colors.blue,
-              ),
-            )
           ],
         ),
       ),

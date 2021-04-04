@@ -2,17 +2,35 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class Subject extends StatelessWidget {
-  String nazivPredmeta;
-  String sifraPredmeta;
-  String godinaStudija;
-  Subject({this.nazivPredmeta, this.sifraPredmeta, this.godinaStudija});
-  otvoriPredmet(context) {}
+class Comment extends StatefulWidget {
+  String comment;
+  int mark;
+  Comment({this.comment, this.mark});
+  @override
+  _CommentState createState() => _CommentState(this.comment, this.mark);
+}
+
+class _CommentState extends State<Comment> {
+  String comment;
+  bool clicked = false;
+  int mark;
+  _CommentState(comm, mm) {
+    this.comment = comm;
+    this.mark = mm;
+  }
+  otvoriKomentar() {
+    setState(() {
+      clicked = !clicked;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => otvoriPredmet(context),
-      child: Container(
+      onTap: otvoriKomentar,
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 500),
+        curve: Curves.elasticOut,
         margin: EdgeInsets.only(bottom: 15, left: 10, right: 10),
         decoration: BoxDecoration(
             boxShadow: [
@@ -26,15 +44,17 @@ class Subject extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(15))),
         width: MediaQuery.of(context).size.width,
-        height: 90,
+        height: clicked ? 180 : 90,
         child: Row(
+          mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
                 child: Padding(
               padding: const EdgeInsets.only(left: 20.0),
-              child: Text(nazivPredmeta,
-                  overflow: TextOverflow.ellipsis, maxLines: 3),
+              child: Text(comment,
+                  overflow: TextOverflow.ellipsis, maxLines: clicked ? 13 : 3),
             )),
             RatingBar.builder(
               initialRating: 3,
