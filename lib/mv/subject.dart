@@ -1,13 +1,35 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:student_connection/pages/subjectPage.dart';
 
 class Subject extends StatelessWidget {
   String nazivPredmeta;
   String sifraPredmeta;
   String godinaStudija;
   Subject({this.nazivPredmeta, this.sifraPredmeta, this.godinaStudija});
-  otvoriPredmet(context) {}
+  otvoriPredmet(context) {
+    Navigator.push(
+        context,
+        PageRouteBuilder(
+            transitionDuration: Duration(milliseconds: 400),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              var begin = Offset(0.0, 1.0);
+              var end = Offset.zero;
+              var tween = Tween(begin: begin, end: end);
+              var offsetAnimation = animation.drive(tween);
+
+              return SlideTransition(
+                position: offsetAnimation,
+                child: child,
+              );
+            },
+            pageBuilder: (context, animation, secAnimation) {
+              return SubjectPage();
+            }));
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

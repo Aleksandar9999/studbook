@@ -1,37 +1,38 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:student_connection/mv/comment.dart';
-import 'package:student_connection/mv/faculty.dart';
 import 'package:student_connection/mv/study_program.dart';
 import 'package:student_connection/pages/useFulLinkPage.dart';
 
-class FacultyBook extends StatefulWidget {
-  FacultyBook({this.faks});
-  Faculty faks;
+class SubjectPage extends StatefulWidget {
   @override
-  _FacultyBookState createState() => _FacultyBookState(faks: this.faks);
+  _SubjectPageState createState() => _SubjectPageState();
 }
 
-class _FacultyBookState extends State<FacultyBook> {
-  Faculty faks;
-  _FacultyBookState({this.faks});
-  List<StudyProgram> komentari;
+class _SubjectPageState extends State<SubjectPage> {
+  List<Comment> komentari = [];
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
-    komentari = [];
-    komentari.add(new StudyProgram(
-      comment: "Arhitektura",
-      mark: 1,
+    komentari.add(Comment(
+      comment: "Mnogo zanimvljiv i korisan predmet.",
+      mark: 3,
     ));
-    komentari.add(new StudyProgram(
-      comment: "Biomedicinski inzinjering",
-      mark: 2,
+    komentari.add(Comment(
+      comment: "Mnogo zanimvljiv i korisan predmet.",
+      mark: 3,
     ));
-    //controller=new TabController(length: 3, vsync: )
+    komentari.add(Comment(
+      comment: "Mnogo zanimvljiv i korisan predmet.",
+      mark: 3,
+    ));
+    komentari.add(Comment(
+      comment:
+          ".Mnogo zanimvljiv i korisan predmet.Mnogo zanimvljiv i korisan predmetvMnogo zanimvljiv i korisan predmet.Mnogo zanimvljiv i korisan predmetMnogo zanimvljiv i korisan predmet.Mnogo zanimvljiv i korisan predmet.Mnogo zanimvljiv i korisan predmet.",
+      mark: 3,
+    ));
   }
-
-  DefaultTabController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +47,7 @@ class _FacultyBookState extends State<FacultyBook> {
               ),
               bottom: TabBar(labelColor: Colors.black, tabs: [
                 Tab(
-                  text: "Studentski\nprogrami",
+                  text: "Komentari",
                 ),
                 Tab(text: "Korisni\nlinkovi"),
               ]),
@@ -55,7 +56,7 @@ class _FacultyBookState extends State<FacultyBook> {
               title: Container(
                   color: Colors.white,
                   child: Text(
-                    faks.nazivFakulteta,
+                    "Naziv predmeta",
                     style: TextStyle(color: Colors.black),
                   )),
             ),

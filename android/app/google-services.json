@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "603125092389",
+    "project_id": "studentbook-27a48",
+    "storage_bucket": "studentbook-27a48.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603125092389:android:94dca391e05a5b1780afcc",
+        "android_client_info": {
+          "package_name": "com.alex.student_book"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "603125092389-hibrn36ek08al8vb6hfa9vhk9oqqo81q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alex.student_book",
+            "certificate_hash": "c74dc15744cf98f6eedebe71f1a785d7c33d37b1"
+          }
+        },
+        {
+          "client_id": "603125092389-emc30djltdl0iu9ir7tjr70qnh51b005.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKkWOEabUco7Hdq_r8VhMhxDNwFtXN4fQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "603125092389-emc30djltdl0iu9ir7tjr70qnh51b005.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

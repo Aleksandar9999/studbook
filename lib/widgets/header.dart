@@ -8,10 +8,8 @@ class Header extends StatelessWidget {
       height: 60,
       color: Colors.white,
       child: Center(
-          child: Padding(
-        padding: const EdgeInsets.all(10.0),
         child: Image.asset("files/logoforweb.jpg"),
-      )),
+      ),
     );
   }
 }
