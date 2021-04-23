@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 60,
-      color: Colors.white,
-      child: Center(
-        child: Image.asset("files/logoforweb.jpg"),
+    return GestureDetector(
+      onTap: () => Navigator.pop(context),
+      child: Container(
+        height: 60,
+        color: Colors.white,
+        child: Center(
+          child: Image.asset("files/logoforweb.jpg"),
+        ),
       ),
     );
   }

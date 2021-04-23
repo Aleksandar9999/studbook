@@ -6,7 +6,7 @@ import 'package:student_connection/user.dart';
 import 'package:student_connection/widgets/header.dart';
 import 'package:intl/intl.dart';
 import 'package:dropdownfield/dropdownfield.dart';
-
+import 'package:student_connection/repository/usersRepository.dart';
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uuid/uuid.dart';
@@ -28,7 +28,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final emailController = new TextEditingController();
   final godinaStudijaController = new TextEditingController();
   DateTime selectedDate = DateTime.now();
-  final usersRef = FirebaseFirestore.instance.collection("users");
+
   List<String> fakulteti = ["FTN", "PMF"];
   List<String> godinaStudija = [
     '1(prva)',
@@ -56,7 +56,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
   saveUser() async {
     String id = Uuid().v1();
     User user = User(
-        userId: id,
         dateTime: selectedDate,
         email: emailController.text,
         faculty: fakultetController.text,
@@ -68,9 +67,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
         username: userController.text,
         yearStudy: godinaStudijaController.text);
     print(user);
-
-    await usersRef.doc(id).set({
-      "userId": id,
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text('Obrada podataka...')));
+    await usersRef.doc(userController.text).set({
       "dateTime": selectedDate,
       "email": emailController.text,
       "faculty": fakultetController.text,
@@ -82,7 +81,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
       "username": userController.text,
       "yearStudy": godinaStudijaController.text
     });
-    Navigator.pop(context);
+
+    Navigator.pop(context, [true]);
   }
 
   getStudijeskePrograme() {
@@ -254,12 +254,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 child: Center(
                   child: GestureDetector(
                       onTap: () => {
-                            if (_formKey.currentState.validate())
-                              {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text('Processing Data'))),
-                                saveUser()
-                              }
+                            if (_formKey.currentState.validate()) {saveUser()}
                           },
                       child: Container(
                         width: 100,
