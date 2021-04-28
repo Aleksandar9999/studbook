@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -6,6 +7,13 @@ class Comment extends StatefulWidget {
   String comment;
   int mark;
   Comment({this.comment, this.mark});
+
+  factory Comment.fromDocument(DocumentSnapshot doc) {
+    return Comment(
+      comment: doc['comment'],
+      mark: doc['mark'],
+    );
+  }
   @override
   _CommentState createState() => _CommentState(this.comment, this.mark);
 }
@@ -57,13 +65,12 @@ class _CommentState extends State<Comment> {
                   overflow: TextOverflow.ellipsis, maxLines: clicked ? 13 : 3),
             )),
             RatingBar.builder(
-              initialRating: 3,
+              initialRating: mark.toDouble(),
               itemSize: 20,
               minRating: 1,
               direction: Axis.horizontal,
               allowHalfRating: true,
               itemCount: 5,
-              maxRating: 3,
               ignoreGestures: true,
               itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
               itemBuilder: (context, _) => Icon(

@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:student_connection/mv/subject.dart';
+import 'package:student_connection/model/user.dart';
+import 'package:student_connection/repository/studyprograms.dart';
+import 'package:student_connection/repository/usersRepository.dart';
+import 'package:student_connection/widgets/header.dart';
+import 'package:student_connection/widgets/subject.dart';
 
 class SubjectsPage extends StatefulWidget {
   @override
@@ -9,37 +13,34 @@ class SubjectsPage extends StatefulWidget {
 
 class _SubjectsPageState extends State<SubjectsPage> {
   List<Subject> predmeti;
+  bool done = false;
   @override
   void initState() {
-    // TODO: implement initState
+    gett();
     super.initState();
-    predmeti = [];
-    predmeti.add(Subject(
-      godinaStudija: "1",
-      nazivPredmeta: "Arhitektura 1",
-      sifraPredmeta: "1",
-    ));
-    predmeti.add(Subject(
-      godinaStudija: "1",
-      nazivPredmeta: "Arhitektura 2",
-      sifraPredmeta: "2",
-    ));
-    predmeti.add(Subject(
-      godinaStudija: "1",
-      nazivPredmeta: "Arhitektura 3",
-      sifraPredmeta: "3",
-    ));
-    predmeti.add(Subject(
-      godinaStudija: "1",
-      nazivPredmeta: "Arhitektura 4",
-      sifraPredmeta: "4",
-    ));
+  }
+
+  gett() async {
+    await GetListSubjects(loggedInUser.studyProgramId);
+    setState(() {
+      done = true;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: predmeti,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
+        title: Header(),
+      ),
+      body: done == false
+          ? Text("Waiting")
+          : Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: ListView(children: listSubjects),
+            ),
     );
   }
 }

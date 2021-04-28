@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:student_connection/mv/comment.dart';
-import 'package:student_connection/mv/faculty.dart';
-import 'package:student_connection/mv/study_program.dart';
+import 'package:student_connection/widgets/comment.dart';
+import 'package:student_connection/widgets/faculty.dart';
+import 'package:student_connection/widgets/study_program.dart';
 import 'package:student_connection/pages/useFulLinkPage.dart';
 
 class FacultyBook extends StatefulWidget {

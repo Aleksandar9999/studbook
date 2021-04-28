@@ -1,44 +1,52 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:student_connection/mv/comment.dart';
-import 'package:student_connection/mv/study_program.dart';
+import 'package:student_connection/model/user.dart';
+import 'package:student_connection/repository/studyprograms.dart';
+import 'package:student_connection/widgets/comment.dart';
+import 'package:student_connection/widgets/study_program.dart';
 import 'package:student_connection/pages/useFulLinkPage.dart';
 
 class SubjectPage extends StatefulWidget {
+  String idPredmeta;
+  String nameSubject;
+  SubjectPage({this.idPredmeta, this.nameSubject});
   @override
-  _SubjectPageState createState() => _SubjectPageState();
+  _SubjectPageState createState() =>
+      _SubjectPageState(idSubject: this.idPredmeta, nameSubject: nameSubject);
 }
 
 class _SubjectPageState extends State<SubjectPage> {
   List<Comment> komentari = [];
+  String idSubject;
+  String nameSubject;
+  _SubjectPageState({this.idSubject, this.nameSubject});
+  bool done = false;
   @override
   void initState() {
-    // TODO: implement initState
+    gett();
     super.initState();
-    komentari.add(Comment(
-      comment: "Mnogo zanimvljiv i korisan predmet.",
-      mark: 3,
-    ));
-    komentari.add(Comment(
-      comment: "Mnogo zanimvljiv i korisan predmet.",
-      mark: 3,
-    ));
-    komentari.add(Comment(
-      comment: "Mnogo zanimvljiv i korisan predmet.",
-      mark: 3,
-    ));
-    komentari.add(Comment(
-      comment:
-          ".Mnogo zanimvljiv i korisan predmet.Mnogo zanimvljiv i korisan predmetvMnogo zanimvljiv i korisan predmet.Mnogo zanimvljiv i korisan predmetMnogo zanimvljiv i korisan predmet.Mnogo zanimvljiv i korisan predmet.Mnogo zanimvljiv i korisan predmet.",
-      mark: 3,
-    ));
+  }
+
+  gett() async {
+    await GetSubjectComments(idSubject);
+    setState(() {
+      done = true;
+    });
+  }
+
+  getTab() {
+    if (loggedInUser != null) return Tab(text: "Skripte");
+  }
+
+  getView() {
+    if (loggedInUser != null) return UseFulLinkPage();
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: DefaultTabController(
-        length: 2,
+        length: loggedInUser != null ? 3 : 2,
         child: Scaffold(
             appBar: AppBar(
               leading: IconButton(
@@ -50,23 +58,27 @@ class _SubjectPageState extends State<SubjectPage> {
                   text: "Komentari",
                 ),
                 Tab(text: "Korisni\nlinkovi"),
+                getTab()
               ]),
               backgroundColor: Colors.white,
               elevation: 0,
               title: Container(
                   color: Colors.white,
                   child: Text(
-                    "Naziv predmeta",
+                    nameSubject,
                     style: TextStyle(color: Colors.black),
                   )),
             ),
             body: Padding(
               padding: EdgeInsets.only(top: 30),
               child: TabBarView(children: [
-                ListView(
-                  children: komentari,
-                ),
+                done
+                    ? ListView(
+                        children: listComment,
+                      )
+                    : Text(""),
                 UseFulLinkPage(),
+                getView()
               ]),
             )),
       ),

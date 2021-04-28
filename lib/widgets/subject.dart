@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -7,7 +8,23 @@ class Subject extends StatelessWidget {
   String nazivPredmeta;
   String sifraPredmeta;
   String godinaStudija;
-  Subject({this.nazivPredmeta, this.sifraPredmeta, this.godinaStudija});
+  String semestar;
+  int mark;
+  Subject(
+      {this.mark,
+      this.semestar,
+      this.nazivPredmeta,
+      this.sifraPredmeta,
+      this.godinaStudija});
+  factory Subject.fromDocument(DocumentSnapshot doc) {
+    return Subject(
+      nazivPredmeta: doc['ime'],
+      sifraPredmeta: doc['id'],
+      godinaStudija: doc['godina'],
+      semestar: doc['semestar'],
+    );
+  }
+
   otvoriPredmet(context) {
     Navigator.push(
         context,
@@ -26,7 +43,8 @@ class Subject extends StatelessWidget {
               );
             },
             pageBuilder: (context, animation, secAnimation) {
-              return SubjectPage();
+              return SubjectPage(
+                  idPredmeta: sifraPredmeta, nameSubject: nazivPredmeta);
             }));
   }
 
@@ -65,7 +83,6 @@ class Subject extends StatelessWidget {
               direction: Axis.horizontal,
               allowHalfRating: true,
               itemCount: 5,
-              maxRating: 3,
               ignoreGestures: true,
               itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
               itemBuilder: (context, _) => Icon(

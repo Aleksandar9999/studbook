@@ -1,3 +1,5 @@
+import 'package:student_connection/model/studyprogram.dart';
+
 class User {
   String username;
   String password;
@@ -8,10 +10,12 @@ class User {
   String pol;
   DateTime dateTime;
   String faculty;
-  String studyProgram;
+  String studyProgramId;
   String yearStudy;
   String userId;
+  StudyProgramModel studyProgram;
   User({
+    this.studyProgram,
     this.userId,
     this.username,
     this.password,
@@ -21,7 +25,9 @@ class User {
     this.pol,
     this.dateTime,
     this.faculty,
-    this.studyProgram,
+    this.studyProgramId,
     this.yearStudy,
   });
 }
+
+User loggedInUser;

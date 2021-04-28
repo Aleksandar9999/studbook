@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:student_connection/mv/comment.dart';
+import 'package:student_connection/widgets/comment.dart';
 
 class CommentsPage extends StatefulWidget {
   @override

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:student_connection/mv/usefullinks.dart';
+import 'package:student_connection/widgets/usefullinks.dart';
 
 class UseFulLinkPage extends StatefulWidget {
   @override

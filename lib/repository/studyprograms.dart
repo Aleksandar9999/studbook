@@ -1,119 +1,190 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:uuid/uuid.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:student_connection/widgets/comment.dart';
+
+import 'package:student_connection/widgets/subject.dart';
 
 final programsRef = FirebaseFirestore.instance.collection("studyprograms");
+final commentsRef = FirebaseFirestore.instance.collection("comments");
+List<Subject> listSubjects = [];
+List<Comment> listComment = [];
 
-void popuni() {
+Future<List<Subject>> GetListSubjects(idProgram) async {
+  if (listSubjects.isNotEmpty) return listSubjects;
+
+  QuerySnapshot querySnapshot =
+      await programsRef.doc(idProgram).collection('subjects').get();
+
+  querySnapshot.docs.forEach((element) {
+    Subject subject = Subject.fromDocument(element);
+    listSubjects.add(subject);
+  });
+
+  return listSubjects;
+}
+
+Future<List<Comment>> GetSubjectComments(idSubject) async {
+  if (listComment.isNotEmpty) listComment.clear();
+
+  QuerySnapshot querySnapshot =
+      await commentsRef.where('idSubject', isEqualTo: idSubject).get();
+
+  querySnapshot.docs.forEach((element) {
+    print(element.data()['idSubject']);
+
+    listComment.add(Comment.fromDocument(element));
+  });
+
+  return listComment;
+}
+
+Future<String> getName(idProgram) async {
+  DocumentSnapshot querySnapshot = await programsRef.doc(idProgram).get();
+  return querySnapshot['ime'];
+}
+
+
+/* void popuni() {
   var id = Uuid().v1();
-  /* programsRef.doc("1Vb1XDy4b5So1iTT41nf").collection('subjects').doc(id).set({
-    "ime": "Racunarski praktikum",
+  programsRef.doc("fCcvuILclamUuO63qpKo").collection('subjects').doc(id).set({
+    "ime": "Matematička analiza 1",
     "godina": "1",
     "semestar": "1",
     "id": id
   });
   id = Uuid().v1();
   programsRef
-      .doc("1Vb1XDy4b5So1iTT41nf")
+      .doc("fCcvuILclamUuO63qpKo")
       .collection('subjects')
       .doc(id)
       .set({"ime": "Algebra", "godina": "1", "semestar": "1", "id": id});
   id = Uuid().v1();
-  programsRef.doc("1Vb1XDy4b5So1iTT41nf").collection('subjects').doc(id).set(
-      {"ime": "Uvod u geodeziju", "godina": "1", "semestar": "1", "id": id});
-  id = Uuid().v1();
-  programsRef
-      .doc("1Vb1XDy4b5So1iTT41nf")
-      .collection('subjects')
-      .doc(id)
-      .set({"ime": "Fizika", "godina": "1", "semestar": "1", "id": id});
-  id = Uuid().v1();
-  programsRef
-      .doc("1Vb1XDy4b5So1iTT41nf")
-      .collection('subjects')
-      .doc(id)
-      .set({"ime": "Perspektiva", "godina": "1", "semestar": "1", "id": id});
-  id = Uuid().v1();
-  programsRef.doc("1Vb1XDy4b5So1iTT41nf").collection('subjects').doc(id).set({
-    "ime": "Nacrtna geometrija u geomatici",
+  programsRef.doc("fCcvuILclamUuO63qpKo").collection('subjects').doc(id).set({
+    "ime": "Programski jezici i strukture podataka",
     "godina": "1",
     "semestar": "1",
     "id": id
   });
   id = Uuid().v1();
-  programsRef.doc("1Vb1XDy4b5So1iTT41nf").collection('subjects').doc(id).set({
-    "ime": "Matematička analiza 1",
+  programsRef.doc("fCcvuILclamUuO63qpKo").collection('subjects').doc(id).set({
+    "ime": "Engleski jezik - osnovni",
     "godina": "1",
-    "semestar": "2",
+    "semestar": "1",
+    "id": id
+  });
+  id = Uuid().v1();
+  programsRef.doc("fCcvuILclamUuO63qpKo").collection('subjects').doc(id).set({
+    "ime": "Engleski jezik - srednji",
+    "godina": "1",
+    "semestar": "1",
+    "id": id
+  });
+  id = Uuid().v1();
+  programsRef.doc("fCcvuILclamUuO63qpKo").collection('subjects').doc(id).set({
+    "ime": "Engleski jezik - viši",
+    "godina": "1",
+    "semestar": "1",
     "id": id
   });
   id = Uuid().v1();
   programsRef
-      .doc("1Vb1XDy4b5So1iTT41nf")
+      .doc("fCcvuILclamUuO63qpKo")
       .collection('subjects')
       .doc(id)
-      .set({"ime": "Geodezija 1", "godina": "1", "semestar": "2", "id": id});
+      .set({"ime": "Fizika", "godina": "1", "semestar": "2", "id": id});
   id = Uuid().v1();
-  programsRef.doc("1Vb1XDy4b5So1iTT41nf").collection('subjects').doc(id).set(
-      {"ime": "Osnove geonauka", "godina": "1", "semestar": "2", "id": id});
-  id = Uuid().v1();
-  programsRef.doc("1Vb1XDy4b5So1iTT41nf").collection('subjects').doc(id).set({
-    "ime": "Tehnike geodetskih merenja",
+  programsRef.doc("fCcvuILclamUuO63qpKo").collection('subjects').doc(id).set({
+    "ime": "Osnovi elektrotehnike",
     "godina": "1",
     "semestar": "2",
     "id": id
   });
   id = Uuid().v1();
-  programsRef.doc("1Vb1XDy4b5So1iTT41nf").collection('subjects').doc(id).set({
-    "ime": "Uvod u informacione tehnologije u geomatici",
+  programsRef.doc("fCcvuILclamUuO63qpKo").collection('subjects').doc(id).set({
+    "ime": "Arhitektura računara",
     "godina": "1",
     "semestar": "2",
     "id": id
   });
   id = Uuid().v1();
-  programsRef.doc("1Vb1XDy4b5So1iTT41nf").collection('subjects').doc(id).set(
-      {"ime": "Sociologija tehnike", "godina": "1", "semestar": "2", "id": id});
+  programsRef.doc("fCcvuILclamUuO63qpKo").collection('subjects').doc(id).set({
+    "ime": "Engleski jezik - srednji",
+    "godina": "1",
+    "semestar": "2",
+    "id": id
+  });
   id = Uuid().v1();
-  programsRef
-      .doc("1Vb1XDy4b5So1iTT41nf")
-      .collection('subjects')
-      .doc(id)
-      .set({"ime": "Ekonomija", "godina": "1", "semestar": "2", "id": id});
+  programsRef.doc("fCcvuILclamUuO63qpKo").collection('subjects').doc(id).set({
+    "ime": "Engleski jezik - viši",
+    "godina": "1",
+    "semestar": "2",
+    "id": id
+  });
   id = Uuid().v1();
-  programsRef.doc("1Vb1XDy4b5So1iTT41nf").collection('subjects').doc(id).set({
+  programsRef.doc("fCcvuILclamUuO63qpKo").collection('subjects').doc(id).set({
+    "ime": "Nemački jezik - osnovni",
+    "godina": "1",
+    "semestar": "2",
+    "id": id
+  });
+  id = Uuid().v1();
+  programsRef.doc("fCcvuILclamUuO63qpKo").collection('subjects').doc(id).set({
+    "ime": "Modeliranje i simulacija sistema",
+    "godina": "2",
+    "semestar": "1",
+    "id": id
+  });
+  id = Uuid().v1();
+  programsRef.doc("fCcvuILclamUuO63qpKo").collection('subjects').doc(id).set({
+    "ime": "Logičko projektovanje računarskih sistema 1",
+    "godina": "2",
+    "semestar": "1",
+    "id": id
+  });
+  id = Uuid().v1();
+  programsRef.doc("fCcvuILclamUuO63qpKo").collection('subjects').doc(id).set({
     "ime": "Matematička analiza 2",
-    "godina": "3",
-    "semestar": "1",
-    "id": id
-  });
-  id = Uuid().v1();
-  programsRef
-      .doc("1Vb1XDy4b5So1iTT41nf")
-      .collection('subjects')
-      .doc(id)
-      .set({"ime": "Geodezija 2", "godina": "2", "semestar": "1", "id": id});
-  id = Uuid().v1();
-  programsRef.doc("1Vb1XDy4b5So1iTT41nf").collection('subjects').doc(id).set(
-      {"ime": "Opšta kartografija", "godina": "2", "semestar": "1", "id": id});
-  id = Uuid().v1();
-  programsRef.doc("1Vb1XDy4b5So1iTT41nf").collection('subjects').doc(id).set({
-    "ime": "Informacioni sistemi i baze podataka",
     "godina": "2",
     "semestar": "1",
     "id": id
   });
   id = Uuid().v1();
-  programsRef.doc("1Vb1XDy4b5So1iTT41nf").collection('subjects').doc(id).set({
-    "ime": "Sistemi i signali u geomatici",
+  programsRef.doc("fCcvuILclamUuO63qpKo").collection('subjects').doc(id).set({
+    "ime": "Objektno programiranje",
     "godina": "2",
     "semestar": "1",
     "id": id
   });
   id = Uuid().v1();
-  programsRef.doc("1Vb1XDy4b5So1iTT41nf").collection('subjects').doc(id).set({
-    "ime": "Osnove građevinarstva",
+  programsRef.doc("fCcvuILclamUuO63qpKo").collection('subjects').doc(id).set(
+      {"ime": "Operativni sistemi", "godina": "2", "semestar": "2", "id": id});
+  id = Uuid().v1();
+  programsRef.doc("fCcvuILclamUuO63qpKo").collection('subjects').doc(id).set({
+    "ime": "Sociološki aspekti tehničkog razvoja",
     "godina": "2",
-    "semestar": "1",
+    "semestar": "2",
     "id": id
-  }); */
-}
+  });
+  id = Uuid().v1();
+  programsRef.doc("fCcvuILclamUuO63qpKo").collection('subjects').doc(id).set({
+    "ime": "Sistemi automatskog upravljanja",
+    "godina": "2",
+    "semestar": "2",
+    "id": id
+  });
+  id = Uuid().v1();
+  programsRef.doc("fCcvuILclamUuO63qpKo").collection('subjects').doc(id).set({
+    "ime": "Sistemska programska podrška u realnom vremenu 1",
+    "godina": "2",
+    "semestar": "2",
+    "id": id
+  });
+  id = Uuid().v1();
+  programsRef.doc("fCcvuILclamUuO63qpKo").collection('subjects').doc(id).set({
+    "ime": "Verovatnoća i slučajni procesi",
+    "godina": "2",
+    "semestar": "2",
+    "id": id
+  });
+} */

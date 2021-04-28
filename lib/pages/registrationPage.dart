@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:student_connection/user.dart';
+import 'package:student_connection/model/user.dart';
 import 'package:student_connection/widgets/header.dart';
 import 'package:intl/intl.dart';
 import 'package:dropdownfield/dropdownfield.dart';
@@ -60,7 +60,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         email: emailController.text,
         faculty: fakultetController.text,
         name: imeController.text,
-        studyProgram: studijskiController.text,
+        //TODO: TREBA ID STUDIJSKOG PROGRAMA//studyProgramId: studijskiController.text,
         password: lozinkaController.text,
         pol: polController.text,
         surname: prezimeController.text,
@@ -74,7 +74,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       "email": emailController.text,
       "faculty": fakultetController.text,
       "name": imeController.text,
-      "studyProgram": studijskiController.text,
+      //"studyProgram": studijskiController.text,
       "password": lozinkaController.text,
       "pol": polController.text,
       "surname": prezimeController.text,
