@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:student_connection/model/user.dart';
+import 'package:student_connection/pages/scriptsPage.dart';
 import 'package:student_connection/repository/studyprograms.dart';
 import 'package:student_connection/widgets/comment.dart';
 import 'package:student_connection/widgets/study_program.dart';
@@ -39,7 +40,10 @@ class _SubjectPageState extends State<SubjectPage> {
   }
 
   getView() {
-    if (loggedInUser != null) return UseFulLinkPage();
+    if (loggedInUser != null)
+      return ScriptsPage(
+        idSubject: this.idSubject,
+      );
   }
 
   @override
@@ -77,7 +81,7 @@ class _SubjectPageState extends State<SubjectPage> {
                         children: listComment,
                       )
                     : Text(""),
-                UseFulLinkPage(),
+                UseFulLinkPage(idSubject: this.idSubject),
                 getView()
               ]),
             )),

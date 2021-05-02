@@ -4,12 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:student_connection/widgets/comment.dart';
 
 import 'package:student_connection/widgets/subject.dart';
+import 'package:student_connection/widgets/usefullinks.dart';
 
 final programsRef = FirebaseFirestore.instance.collection("studyprograms");
 final commentsRef = FirebaseFirestore.instance.collection("comments");
+final linksRef = FirebaseFirestore.instance.collection("links");
 List<Subject> listSubjects = [];
 List<Comment> listComment = [];
-
+List<UseFullLink> listUsefullLinks = [];
+String subjectId;
 Future<List<Subject>> GetListSubjects(idProgram) async {
   if (listSubjects.isNotEmpty) return listSubjects;
 
@@ -37,6 +40,29 @@ Future<List<Comment>> GetSubjectComments(idSubject) async {
   });
 
   return listComment;
+}
+
+Future<List<UseFullLink>> GetSubjectUseFullLinks(idSubject) async {
+  if (listUsefullLinks.isNotEmpty) listUsefullLinks.clear();
+  print("DADADA");
+  QuerySnapshot querySnapshot =
+      await linksRef.where('idSubject', isEqualTo: idSubject).get();
+  print(querySnapshot.docs);
+  querySnapshot.docs.forEach((element) {
+    listUsefullLinks.add(UseFullLink.fromDocument(element));
+  });
+  return listUsefullLinks;
+}
+
+Future<int> GetSubjectMark(idSubject) async {
+  await GetSubjectComments(idSubject);
+  int mark = 0;
+  if (listComment != null)
+    listComment.forEach((element) {
+      mark += element.mark;
+    });
+  print(mark / listComment.length);
+  return mark / listComment.length as int;
 }
 
 Future<String> getName(idProgram) async {

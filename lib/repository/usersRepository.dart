@@ -6,6 +6,7 @@ import 'package:student_connection/model/user.dart';
 
 bool userLoad = false;
 final usersRef = FirebaseFirestore.instance.collection("users");
+
 Future<bool> ValidUser(String username, String password) async {
   var s = await usersRef.doc(username).get();
   if (!s.exists) return false;

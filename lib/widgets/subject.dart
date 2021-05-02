@@ -3,10 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:student_connection/pages/subjectPage.dart';
+import 'package:student_connection/repository/studyprograms.dart';
 
 class Subject extends StatelessWidget {
   String nazivPredmeta;
-  String sifraPredmeta;
+  String idPredmeta;
   String godinaStudija;
   String semestar;
   int mark;
@@ -14,14 +15,16 @@ class Subject extends StatelessWidget {
       {this.mark,
       this.semestar,
       this.nazivPredmeta,
-      this.sifraPredmeta,
+      this.idPredmeta,
       this.godinaStudija});
+
   factory Subject.fromDocument(DocumentSnapshot doc) {
     return Subject(
       nazivPredmeta: doc['ime'],
-      sifraPredmeta: doc['id'],
+      idPredmeta: doc['id'],
       godinaStudija: doc['godina'],
       semestar: doc['semestar'],
+      mark: 2,
     );
   }
 
@@ -36,7 +39,6 @@ class Subject extends StatelessWidget {
               var end = Offset.zero;
               var tween = Tween(begin: begin, end: end);
               var offsetAnimation = animation.drive(tween);
-
               return SlideTransition(
                 position: offsetAnimation,
                 child: child,
@@ -44,7 +46,7 @@ class Subject extends StatelessWidget {
             },
             pageBuilder: (context, animation, secAnimation) {
               return SubjectPage(
-                  idPredmeta: sifraPredmeta, nameSubject: nazivPredmeta);
+                  idPredmeta: idPredmeta, nameSubject: nazivPredmeta);
             }));
   }
 
@@ -77,7 +79,7 @@ class Subject extends StatelessWidget {
                   overflow: TextOverflow.ellipsis, maxLines: 3),
             )),
             RatingBar.builder(
-              initialRating: 3,
+              initialRating: this.mark as double,
               itemSize: 20,
               minRating: 1,
               direction: Axis.horizontal,

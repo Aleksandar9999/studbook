@@ -1,14 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class UseFulLinks extends StatelessWidget {
+class UseFullLink extends StatelessWidget {
   String url;
   String naziv;
 
-  UseFulLinks({this.url, this.naziv});
-
+  UseFullLink({this.url, this.naziv});
+  factory UseFullLink.fromDocument(DocumentSnapshot doc) {
+    return UseFullLink(url: doc['link'], naziv: doc['name']);
+  }
   otovirURL() {
     launch(url);
   }

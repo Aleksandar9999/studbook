@@ -1,4 +1,3 @@
-import 'package:student_connection/repository/studyprograms.dart';
 import 'package:student_connection/widgets/subject.dart';
 
 class StudyProgramModel {
