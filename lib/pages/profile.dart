@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:student_connection/model/user.dart';
+import 'package:student_connection/repository/studyprograms.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -7,10 +9,41 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  bool done = false;
+  @override
+  void initState() {
+    gett();
+    super.initState();
+    print(loggedInUser.name);
+  }
+
+  String studyProgram;
+  gett() async {
+    studyProgram = await getName(loggedInUser.studyProgramId);
+    setState(() {
+      done = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text("Druga"),
-    );
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: Text(
+            loggedInUser.name + " " + loggedInUser.surname,
+            style: TextStyle(color: Colors.black),
+          ),
+        ),
+        body: ListView(
+          children: [
+            Text("Email: " + loggedInUser.email),
+            Text("Fakultet: " + loggedInUser.faculty),
+            Text("Studijski program: " + loggedInUser.studyProgram.nameProgram),
+            Text("Pol: " + loggedInUser.pol),
+            Text("Godina studija: " + loggedInUser.yearStudy),
+            Text("Email: " + loggedInUser.email)
+          ],
+        ));
   }
 }

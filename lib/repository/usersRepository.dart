@@ -13,14 +13,19 @@ Future<bool> ValidUser(String username, String password) async {
 
   if (s.data()['password'] == password) {
     StudyProgramModel modl;
-    getProgram(s.data()['studyProgram']).then((value) => modl);
+    await getStudyProgram(s.data()['studyProgram'])
+        .then((value) => modl = value);
     loggedInUser = User(
         userId: username,
         username: username,
         name: s.data()['name'],
         studyProgramId: s.data()['studyProgram'],
         yearStudy: s.data()['yearStudy'],
-        studyProgram: modl);
+        studyProgram: modl,
+        email: s.data()['email'],
+        faculty: s.data()['faculty'],
+        surname: s.data()['surname'],
+        pol: s.data()['pol']);
 
     userLoad = true;
     return true;

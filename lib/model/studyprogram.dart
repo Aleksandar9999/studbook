@@ -4,6 +4,5 @@ class StudyProgramModel {
   String idProgram;
   String nameProgram;
   List<Subject> subjectsProgram;
+  StudyProgramModel({this.nameProgram, this.idProgram});
 }
-
-Future<StudyProgramModel> getProgram(idProgram) async {}

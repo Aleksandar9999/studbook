@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:student_connection/model/studyprogram.dart';
 import 'package:student_connection/widgets/comment.dart';
+import 'package:student_connection/widgets/study_program.dart';
 
 import 'package:student_connection/widgets/subject.dart';
 import 'package:student_connection/widgets/usefullinks.dart';
@@ -70,6 +72,11 @@ Future<String> getName(idProgram) async {
   return querySnapshot['ime'];
 }
 
+Future<StudyProgramModel> getStudyProgram(idProgram) async {
+  DocumentSnapshot querySnapshot = await programsRef.doc(idProgram).get();
+  return StudyProgramModel(
+      idProgram: querySnapshot['id'], nameProgram: querySnapshot['ime']);
+}
 
 /* void popuni() {
   var id = Uuid().v1();
