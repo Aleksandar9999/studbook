@@ -41,7 +41,7 @@ class _StudentProgramPageState extends State<StudentProgramPage> {
               padding: EdgeInsets.only(top: 30),
               child: TabBarView(children: [
                 SubjectsPage(),
-                CommentsPage(),
+                CommentsPage(""), //TODO IDPROGRAM
                 UseFulLinkPage(),
               ]),
             )),

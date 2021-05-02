@@ -1,40 +1,42 @@
 import 'package:flutter/cupertino.dart';
+import 'package:student_connection/repository/studyprograms.dart';
 import 'package:student_connection/widgets/comment.dart';
 
 class CommentsPage extends StatefulWidget {
+  String idSubject;
+  CommentsPage(String id) {
+    this.idSubject = id;
+  }
   @override
-  _CommentsPageState createState() => _CommentsPageState();
+  _CommentsPageState createState() => _CommentsPageState(this.idSubject);
 }
 
 class _CommentsPageState extends State<CommentsPage> {
   List<Comment> komentari = [];
+  String idSubject;
+  _CommentsPageState(String id) {
+    this.idSubject = id;
+  }
+  bool done = false;
   @override
   void initState() {
-    // TODO: implement initState
+    gett();
     super.initState();
-    komentari.add(Comment(
-      comment: "Mnogo zanimvljiv i korisan predmet.",
-      mark: 3,
-    ));
-    komentari.add(Comment(
-      comment: "Mnogo zanimvljiv i korisan predmet.",
-      mark: 3,
-    ));
-    komentari.add(Comment(
-      comment: "Mnogo zanimvljiv i korisan predmet.",
-      mark: 3,
-    ));
-    komentari.add(Comment(
-      comment:
-          ".Mnogo zanimvljiv i korisan predmet.Mnogo zanimvljiv i korisan predmetvMnogo zanimvljiv i korisan predmet.Mnogo zanimvljiv i korisan predmetMnogo zanimvljiv i korisan predmet.Mnogo zanimvljiv i korisan predmet.Mnogo zanimvljiv i korisan predmet.",
-      mark: 3,
-    ));
+  }
+
+  gett() async {
+    await GetSubjectComments(idSubject);
+    setState(() {
+      done = true;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: komentari,
-    );
+    return done
+        ? ListView(
+            children: listComment,
+          )
+        : Text("");
   }
 }

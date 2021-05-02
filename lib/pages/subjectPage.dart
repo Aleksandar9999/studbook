@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:student_connection/dialogs/addNewCommentDialog.dart';
+import 'package:student_connection/dialogs/addNewUseFullLinkDialog.dart';
 import 'package:student_connection/model/user.dart';
+import 'package:student_connection/pages/commentsPage.dart';
 import 'package:student_connection/pages/scriptsPage.dart';
 import 'package:student_connection/repository/studyprograms.dart';
 import 'package:student_connection/widgets/comment.dart';
@@ -24,15 +27,7 @@ class _SubjectPageState extends State<SubjectPage> {
   bool done = false;
   @override
   void initState() {
-    gett();
     super.initState();
-  }
-
-  gett() async {
-    await GetSubjectComments(idSubject);
-    setState(() {
-      done = true;
-    });
   }
 
   getTab() {
@@ -46,46 +41,80 @@ class _SubjectPageState extends State<SubjectPage> {
       );
   }
 
+  int tabIndex = 0;
+  floatingButtonClicked() {
+    print(tabIndex);
+    if (tabIndex == 0)
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return Container(height: 150, child: AddNewCommentDialog());
+          });
+    else if (tabIndex == 1) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AddNewUseFullLinkDialog();
+          });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: DefaultTabController(
-        length: loggedInUser != null ? 3 : 2,
-        child: Scaffold(
-            appBar: AppBar(
-              leading: IconButton(
-                icon: Icon(Icons.arrow_back, color: Colors.black),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-              bottom: TabBar(labelColor: Colors.black, tabs: [
-                Tab(
-                  text: "Komentari",
-                ),
-                Tab(text: "Korisni\nlinkovi"),
-                getTab()
-              ]),
-              backgroundColor: Colors.white,
-              elevation: 0,
-              title: Container(
-                  color: Colors.white,
-                  child: Text(
-                    nameSubject,
-                    style: TextStyle(color: Colors.black),
-                  )),
+    return DefaultTabController(
+      length: loggedInUser != null ? 3 : 2,
+      child: Builder(builder: (BuildContext context) {
+        final TabController tabController = DefaultTabController.of(context);
+        tabController.addListener(() {
+          if (!tabController.indexIsChanging) {
+            if (mounted)
+              setState(() {
+                tabIndex = tabController.index;
+              });
+          }
+        });
+
+        return SafeArea(
+            child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back, color: Colors.black),
+              onPressed: () => Navigator.of(context).pop(),
             ),
-            body: Padding(
-              padding: EdgeInsets.only(top: 30),
-              child: TabBarView(children: [
-                done
-                    ? ListView(
-                        children: listComment,
-                      )
-                    : Text(""),
-                UseFulLinkPage(idSubject: this.idSubject),
-                getView()
-              ]),
-            )),
-      ),
+            bottom: TabBar(labelColor: Colors.black, tabs: [
+              Tab(
+                text: "Komentari",
+              ),
+              Tab(text: "Korisni\nlinkovi"),
+              getTab()
+            ]),
+            backgroundColor: Colors.white,
+            elevation: 0,
+            title: Container(
+                color: Colors.white,
+                child: Text(
+                  nameSubject,
+                  style: TextStyle(color: Colors.black),
+                )),
+          ),
+          body: Padding(
+            padding: EdgeInsets.only(top: 30),
+            child: TabBarView(children: [
+              CommentsPage(idSubject),
+              UseFulLinkPage(idSubject: this.idSubject),
+              getView()
+            ]),
+          ),
+          floatingActionButton: FloatingActionButton(
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+            onPressed: () => floatingButtonClicked(),
+            backgroundColor: Theme.of(context).primaryColor,
+          ),
+        ));
+      }),
     );
   }
 }
