@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:student_connection/model/user.dart';
-import 'package:student_connection/repository/studyprograms.dart';
-import 'package:student_connection/repository/usersRepository.dart';
+import 'package:student_connection/model/User.dart';
+import 'package:student_connection/repository/StudyProgramsRepository.dart';
+import 'package:student_connection/repository/UsersRepository.dart';
 import 'package:student_connection/widgets/header.dart';
-import 'package:student_connection/widgets/subject.dart';
+import '../widgets/Subject.dart';
 
 class SubjectsPage extends StatefulWidget {
   @override
@@ -21,7 +21,7 @@ class _SubjectsPageState extends State<SubjectsPage> {
   }
 
   gett() async {
-    await GetListSubjects(loggedInUser.studyProgramId);
+    await getSubjects(loggedInUser.studyProgramId);
     setState(() {
       done = true;
     });

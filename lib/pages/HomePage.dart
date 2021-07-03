@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:student_connection/pages/profile.dart';
-import 'package:student_connection/pages/subjectspage.dart';
+import 'package:student_connection/pages/ProfilePage.dart';
+import 'package:student_connection/pages/SubjectsPage.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -23,7 +23,6 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     pageController = new PageController();
   }

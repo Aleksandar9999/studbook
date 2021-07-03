@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:student_connection/repository/studyprograms.dart';
+import 'package:student_connection/repository/StudyProgramsRepository.dart';
 import 'package:student_connection/widgets/comment.dart';
 
 class CommentsPage extends StatefulWidget {
@@ -25,7 +25,7 @@ class _CommentsPageState extends State<CommentsPage> {
   }
 
   gett() async {
-    await GetSubjectComments(idSubject);
+    await getSubjectComments(idSubject);
     setState(() {
       done = true;
     });

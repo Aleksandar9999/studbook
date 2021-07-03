@@ -7,7 +7,7 @@ class User {
 
   String name;
   String surname;
-  String pol;
+  String gender;
   DateTime dateTime;
   String faculty;
   String studyProgramId;
@@ -22,7 +22,7 @@ class User {
     this.email,
     this.name,
     this.surname,
-    this.pol,
+    this.gender,
     this.dateTime,
     this.faculty,
     this.studyProgramId,

@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:student_connection/dialogs/addNewCommentDialog.dart';
 import 'package:student_connection/dialogs/addNewUseFullLinkDialog.dart';
-import 'package:student_connection/model/user.dart';
-import 'package:student_connection/pages/commentsPage.dart';
-import 'package:student_connection/pages/scriptsPage.dart';
-import 'package:student_connection/repository/studyprograms.dart';
+import 'package:student_connection/model/User.dart';
+import 'package:student_connection/pages/CommentsPage.dart';
+import 'package:student_connection/pages/ScriptsPage.dart';
+import 'package:student_connection/repository/StudyProgramsRepository.dart';
 import 'package:student_connection/widgets/comment.dart';
-import 'package:student_connection/widgets/study_program.dart';
-import 'package:student_connection/pages/useFulLinkPage.dart';
+import 'package:student_connection/widgets/StudyProgram.dart';
+import 'UseFulLinkPage.dart';
 
 class SubjectPage extends StatefulWidget {
   String idPredmeta;

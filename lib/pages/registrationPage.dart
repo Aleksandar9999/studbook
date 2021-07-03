@@ -2,11 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:student_connection/model/user.dart';
+import 'package:student_connection/model/User.dart';
 import 'package:student_connection/widgets/header.dart';
 import 'package:intl/intl.dart';
 import 'package:dropdownfield/dropdownfield.dart';
-import 'package:student_connection/repository/usersRepository.dart';
+import 'package:student_connection/repository/UsersRepository.dart';
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uuid/uuid.dart';
@@ -62,7 +62,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         name: imeController.text,
         //TODO: TREBA ID STUDIJSKOG PROGRAMA//studyProgramId: studijskiController.text,
         password: lozinkaController.text,
-        pol: polController.text,
+        gender: polController.text,
         surname: prezimeController.text,
         username: userController.text,
         yearStudy: godinaStudijaController.text);

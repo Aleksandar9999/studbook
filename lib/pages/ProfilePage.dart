@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:student_connection/model/user.dart';
-import 'package:student_connection/repository/studyprograms.dart';
+import 'package:student_connection/model/User.dart';
+import 'package:student_connection/repository/StudyProgramsRepository.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -40,7 +40,7 @@ class _ProfileState extends State<Profile> {
             Text("Email: " + loggedInUser.email),
             Text("Fakultet: " + loggedInUser.faculty),
             Text("Studijski program: " + loggedInUser.studyProgram.nameProgram),
-            Text("Pol: " + loggedInUser.pol),
+            Text("Pol: " + loggedInUser.gender),
             Text("Godina studija: " + loggedInUser.yearStudy),
             Text("Email: " + loggedInUser.email)
           ],

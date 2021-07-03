@@ -1,4 +1,4 @@
-import 'package:student_connection/widgets/subject.dart';
+import 'package:student_connection/widgets/Subject.dart';
 
 class StudyProgramModel {
   String idProgram;

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:student_connection/repository/studyprograms.dart';
+import 'package:student_connection/repository/StudyProgramsRepository.dart';
 import 'package:student_connection/widgets/header.dart';
-import 'package:student_connection/widgets/usefullinks.dart';
+import '../widgets/UsefulLink.dart';
 
 class UseFulLinkPage extends StatefulWidget {
   String idSubject;
@@ -24,7 +24,7 @@ class _UseFulLinkPageState extends State<UseFulLinkPage> {
   }
 
   gett() async {
-    await GetSubjectUseFullLinks(this.idSubject);
+    await getSubjectUseFullLinks(this.idSubject);
     setState(() {
       done = true;
     });

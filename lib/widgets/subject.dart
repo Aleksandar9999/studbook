@@ -2,15 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:student_connection/pages/subjectPage.dart';
-import 'package:student_connection/repository/studyprograms.dart';
+import 'package:student_connection/pages/SubjectPage.dart';
+import 'package:student_connection/repository/StudyProgramsRepository.dart';
 
 class Subject extends StatelessWidget {
   String nazivPredmeta;
   String idPredmeta;
   String godinaStudija;
   String semestar;
-  int mark;
+  double mark;
   Subject(
       {this.mark,
       this.semestar,

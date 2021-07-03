@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:student_connection/pages/facultyBook.dart';
+import 'package:student_connection/pages/FacultiesPage.dart';
 
 class Faculty extends StatelessWidget {
   String nazivFakulteta;
@@ -28,7 +28,10 @@ class Faculty extends StatelessWidget {
                   child: child);
             },
             pageBuilder: (context, animation, secAnimation) {
-              return FacultyBook(faks: this);
+              /*return FacultyBook(
+                faks: this,
+              );*/
+              return null;
             }));
   }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:student_connection/pages/loginpage.dart';
+import 'package:student_connection/pages/LoginPage.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 

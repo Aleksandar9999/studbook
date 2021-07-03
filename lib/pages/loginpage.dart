@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:student_connection/pages/facultypage.dart';
-import 'package:student_connection/pages/home.dart';
-import 'package:student_connection/repository/studyprograms.dart';
-import 'package:student_connection/repository/usersRepository.dart';
-import 'registrationPage.dart';
+import 'package:student_connection/pages/HomePage.dart';
+import 'package:student_connection/repository/StudyProgramsRepository.dart';
+import 'package:student_connection/repository/UsersRepository.dart';
+import 'RegistrationPage.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -44,8 +44,6 @@ class _LoginPageState extends State<LoginPage> {
             pageBuilder: (context, animation, secAnimation) {
               return page;
             }));
-    print("REZULTAT");
-    print(res);
     if (res)
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Registracija uspesna.')));

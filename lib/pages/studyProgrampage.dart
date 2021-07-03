@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:student_connection/pages/commentsPage.dart';
-import 'package:student_connection/pages/subjectspage.dart';
-import 'package:student_connection/pages/useFulLinkPage.dart';
+import 'package:student_connection/pages/CommentsPage.dart';
+import 'package:student_connection/pages/SubjectsPage.dart';
+import 'package:student_connection/pages/UseFulLinkPage.dart';
 
 class StudentProgramPage extends StatefulWidget {
   @override

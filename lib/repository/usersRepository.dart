@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:student_connection/model/studyprogram.dart';
-import 'package:student_connection/repository/studyprograms.dart';
-import 'package:student_connection/model/user.dart';
+import 'package:student_connection/repository/StudyProgramsRepository.dart';
+import 'package:student_connection/model/User.dart';
 
 bool userLoad = false;
 final usersRef = FirebaseFirestore.instance.collection("users");
@@ -25,7 +25,7 @@ Future<bool> ValidUser(String username, String password) async {
         email: s.data()['email'],
         faculty: s.data()['faculty'],
         surname: s.data()['surname'],
-        pol: s.data()['pol']);
+        gender: s.data()['pol']);
 
     userLoad = true;
     return true;
