@@ -1,16 +1,16 @@
 # student_connection
+Student Book
 
-A new Flutter project.
+I am creating this app for students and for those who will become students.
 
-## Getting Started
+In this project I am using Firebase.
 
-This project is a starting point for a Flutter application.
+Students can comment, rate, upload usefull links that would help other colleagues to successfully complete the course.
+Also they can rate study programs so the people who have to decide what study program to enroll, make that decidion much 
+easier. 
+This is a first design, I will work on it to increase my Flutter skills.
 
-A few resources to get you started if this is your first Flutter project:
+<img src="https://user-images.githubusercontent.com/73308871/124369290-81f6a080-dc6a-11eb-8094-7d2fde77ff17.jpg" width="250" height="500">
+<img src="https://user-images.githubusercontent.com/73308871/124369303-ac485e00-dc6a-11eb-9269-c688947a2c0d.jpg" width="250" height="500">
+<img src="https://user-images.githubusercontent.com/73308871/124369304-b10d1200-dc6a-11eb-8140-f4efdaea243b.jpg" width="250" height="500">
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
